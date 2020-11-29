@@ -1,3 +1,13 @@
+---
+title: "O4"
+author: "Gruppe 1"
+date: "11/29/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Del 1
+```{r Del 1, echo=TRUE, message=FALSE, warning=FALSE}
 # Laste inn pakker
 library(lme4)
 library(readxl)
@@ -7,8 +17,6 @@ library(lme4)
 library(emmeans)
 library(cowplot)
 library(kableExtra)
-
-#### DEL 1
 
 # Laste inn data
 df <- read_excel("./data/ten_vs_thirty.xlsx", na = "NA")
@@ -171,11 +179,14 @@ est.diff.figur <- sum1 %>%
 
 est.diff.figur
 
-figurO4 <- plot_grid(raw.est.figur, est.diff.figur, ncol = 1,
+figur04 <- plot_grid(raw.est.figur, est.diff.figur, ncol = 1,
                      align = "v",
                      axis = "lr")
+figur04
+```
 
-
+# Del 2
+```{r Del 2, echo=TRUE, message=FALSE, warning=FALSE}
 ##### DEL 2
 
 # Laste inn data
@@ -339,7 +350,9 @@ est.diff.figur2 <- sum2 %>%
 
 est.diff.figur2
 
-figurO5 <- plot_grid(raw.est.figur2, est.diff.figur2, ncol = 1,
+figur05 <- plot_grid(raw.est.figur2, est.diff.figur2, ncol = 1,
                      align = "v",
                      axis = "lr")
+figur05
+```
 
