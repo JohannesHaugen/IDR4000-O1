@@ -1,6 +1,4 @@
 # IDR4000-O1
-IDR4000 - Mappeeksamen, oppgave 1. Dataanalyse for å estimere den minste betydningsfulle forandringen i testen (smallest worthwhile change) og reliabilitet (technical error).
+IDR4000 - Mappeeksamen. Denne repositoryen inneholder alle dataanalyser brukt i eksamensoppgaven i IDR4000 høst 2020.
 
-Testen som brukes i beregningen er Vo2maks. Dataene er hentet fra kurset i fysiologisk testing som vi gjennomførte helt i starten av semesteret.
-
-Del 1 av koden estimerer technical error. Del 2 av koden estimerer den minste betydningsfulle forandringen i testen. 
+Følgende koding er brukt på de ulike deloppgavene:
