@@ -15,19 +15,19 @@ df <- read_excel("./data/ten_vs_thirty.xlsx", na = "NA")
 
 # Klargjør data for legpress
 legpress <- df %>%
-  filter(!is.na(load)) %>% # Fjerner forsøkspersoner uten verdier i load
   filter(exercise == "legpress", # Velger ut øvelsen legpress
-         timepoint %in% c("pre", "post")) %>% # Velger ut timepoints
+         timepoint %in% c("pre", "mid", "post")) %>% # Velger ut timepoints
   mutate(timepoint = factor(timepoint,
-                            levels = c("pre", "post")), # Endre rekkefølgen på timepoints
+                            levels = c("pre", "mid", "post")), # Endre rekkefølgen på timepoints
          group = factor(group,
-                        levels = c("RM30", "RM10"))) # Endre rekkefølgen på gruppene. Ønsker å kontrollere for RM30.
+                        levels = c("RM30", "RM10"))) %>%# Endre rekkefølgen på gruppene. Ønsker å kontrollere for RM30.
+  filter(!is.na(load)) %>% # Fjerner data uten verdier i load
 
 legpress # Printer resultatene
 
 # Lager en figur som viser endringene i styrke for hver forsøksperson i de to gruppene
 leg.figur <- legpress %>%
-  mutate(timepoint = factor(timepoint, levels = c("pre", "post"))) %>%
+  mutate(timepoint = factor(timepoint, levels = c("pre", "mid", "post"))) %>%
   ggplot(aes(timepoint, load, group = subject, color)) + # Velger akser og bestemmer farge etter grupper
   geom_line() + # Hver forsøksperson får en linje mellom timepoints
   labs(x = "Timepoint", y = "1RM (kg)") + # Endre akseetiketter
@@ -74,12 +74,12 @@ est # Printer resultatene
 # Objectet "est" må konverteres til en data frame for å kunne plottes
 est.figur <- est %>% # Lager et nytt objekt med utgangspunkt i gjennomsnittene fra est
   data.frame() %>%
-  mutate(timepoint = factor(timepoint, levels = c("pre", "post"))) %>%
+  mutate(timepoint = factor(timepoint, levels = c("pre", "mid", "post"))) %>%
   ggplot(aes(timepoint, emmean, group = group, color = group)) + 
   geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL), # Representerer konfidensintervallene (95% CI)
                 position = position_dodge(width = 0.2), # Flytter errorbarene fra hverandre
-                width = 0.1) + # Endrer bredden på errorbarene. Det samme med de to linjene under.
-  geom_line(position = position_dodge(width = 0.2)) +
+                width = 0.1) + # Endrer bredden på errorbarene.
+  geom_line(position = position_dodge(width = 0.2)) + # Flytter linjene fra hverandre
   geom_point(position = position_dodge(width = 0.2)) +
   labs(x = "Timepoint", y = "1RM (kg)") + # Endrer akseetiketter
   theme_minimal() # Endrer temaet til figuren
@@ -91,7 +91,7 @@ est.figur # Printer figuren
 raw.est.figur <- est %>%
   # Estimatene fra modellen
   data.frame() %>%
-  mutate(timepoint = factor(timepoint, levels = c("pre", "post"))) %>%
+  mutate(timepoint = factor(timepoint, levels = c("pre", "mid", "post"))) %>%
   ggplot(aes(timepoint, emmean, group = group, color = group)) +
   #legg til rå-dataene
   geom_line(data = legpress, aes(timepoint, load, group = subject, color = group),
@@ -127,7 +127,7 @@ koef
 
 
 # Bruker cbind for å kombinere konfidensintervallene med koeffisientene.
-sum1 <- cbind(koef, data.frame(konfidensintervall)[3:6, ])
+sum1 <- cbind(koef, data.frame(konfidensintervall)[3:8, ])
 sum1
 
 
@@ -136,7 +136,7 @@ koeftabell <- sum1 %>%
   kable(col.names = c("Estimat", "Std. Error", "t-verdi", "CI 2,5%", "CI 97,5%"), # Navn på overskrifter
         digits = c(1,1,2,1,1), # Bestemmer antall desimaler
         caption = "Tabell 1: Estimater fra koeffisientene, standard error, t-statistikk, nedre og øvre
-        konfidensintervall ved pre- og post-test i begge gruppene") %>%
+        konfidensintervall ved pre-test, mid og post-test i begge gruppene") %>%
   kable_classic()
 
 koeftabell
@@ -149,14 +149,14 @@ koeftabell
 est.diff.figur <- sum1 %>%
   mutate(koef = rownames (.)) %>%
   # Filtrerer variablene
-  filter(koef %in% c("timepointpost:groupRM10")) %>%
+  filter(koef %in% c("timepointmid:groupRM10","timepointpost:groupRM10")) %>%
   # Lager en "timepointvariabel" for å presentere legpress datasettet
   mutate(timepoint = gsub("timepoint", "", koef),
          timepoint = gsub(":groupRM10", "", timepoint)) %>%
   # Legger til en rad slik at pre-test er representert
   add_row(timepoint = "pre", koef = "pre") %>%
   # Fikser rekkefølgen til timepoint variabelen
-  mutate(timepoint = factor(timepoint, levels = c("pre", "post"))) %>%
+  mutate(timepoint = factor(timepoint, levels = c("pre", "mid", "post"))) %>%
   # Lager plottet
   ggplot(aes(timepoint, Estimate)) +
   # Legger til en linje som indikerer 0 (horisontal)
@@ -171,10 +171,10 @@ est.diff.figur <- sum1 %>%
 
 est.diff.figur
 
-figurO4 <- plot_grid(raw.est.figur, est.diff.figur, ncol = 1,
+figur04 <- plot_grid(raw.est.figur, est.diff.figur, ncol = 1,
                      align = "v",
                      axis = "lr")
-
+figur04
 
 ##### DEL 2
 
@@ -339,7 +339,8 @@ est.diff.figur2 <- sum2 %>%
 
 est.diff.figur2
 
-figurO5 <- plot_grid(raw.est.figur2, est.diff.figur2, ncol = 1,
+figur05 <- plot_grid(raw.est.figur2, est.diff.figur2, ncol = 1,
                      align = "v",
                      axis = "lr")
 
+figur05

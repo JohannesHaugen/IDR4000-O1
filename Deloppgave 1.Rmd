@@ -1,0 +1,66 @@
+---
+title: "O1"
+author: "Gruppe 1"
+date: "12/1/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r forbered data, message=FALSE, warning=FALSE}
+# Last inn pakker
+library(readxl)
+library(tidyverse)
+library(flextable)
+library(kableExtra)
+
+
+# Forbered datasettet
+data <- read_excel("./data/dataset.xlsx", na = "na") %>% # Last inn datasettet og lagrer det i et nytt objekt "data"
+  select(subject, timepoint, vo2.max) %>% # Velger ut hvilke variabler vi er interessert i
+  pivot_wider(names_from = timepoint,
+              values_from = vo2.max) %>% # Formatterer datasettet slik at det blir til et "wide" datasett
+  filter(!is.na(t2),
+         !is.na(t1)) # Filtrerer vekk forsøkspersoner uten gyldige resultater
+```
+
+```{r technical error, echo=TRUE, message=FALSE, warning=FALSE}
+# Estimat av technical error
+tec.err <- data %>% # Lager ett nytt objekt som skal inneholde estimatet av technical error
+  mutate(change = t2 - t1) %>% # Lager en ny variabel "change" som viser forskjellen mellom t2 og t1
+  group_by() %>%
+  summarise(sd.change = sd(change), # Regner ut standardavviket av endringen fra pre-post
+            mean.test = mean(c(t1, t2)), # Regner ut gjennomsnittet fra testene
+            te.abs = (sd.change / sqrt(2)), # Regner ut den absolutte verdien av techincal error
+            te.relative = (te.abs / mean.test) * 100) %>% # Regner ut den relative verdien av technical error
+  kable(col.names = c("Standardavvik (ml/min)", # Lager tabellene og endrer overskriftene
+                      "Gj.sn. testresultat (ml/min)", 
+                      "Absolutt TE (ml/min)", 
+                      "Relativ TE (%)"),
+        digits = c(0, 0, 0, 1), # Endrer antall desimaler i tabellen
+        caption = "Tabell 1: Estimat av technical error. Standardavvik representerer standardavviket av endringen fra pre til post-test.") %>% # Endrer overskriften
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Formaterer tabellen
+
+tec.err # Printer tabellen
+
+  
+```
+
+```{r smallest worthwile change}
+# Estimat av smallest worthwhile change
+swcvo2.max <- data %>% # Lager ett nytt objekt som skal inneholde estimatet av smallest worthwhile change
+  rowwise() %>%
+  mutate(m = mean(c(t1, t2))) %>% # Regner ut gjennomsnittet av testene
+  ungroup() %>%
+  summarise(sd = sd(m), # Regner ut standardavviket av gjennomsnittet
+            swc = 0.2 * sd) %>% # Regner ut smallest worthwile change
+  kable(col.names = c("Standardavvik (ml/min)", "SWC (ml/min)"), # Lager tabellen og endrer overskriftene
+        digits = c(1,1), # Endrer antall desimaler i tabellen
+        caption = "Tabell 2: Estimat av den minste betydningsfulle forandringen (SWC) og standardavvik.") %>% # Endrer overskriften
+  column_spec(1:2, width_min = "1.7in") %>% # Endrer bredden på kolonnene i tabellen
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Formaterer tabellen 
+
+swcvo2.max # Printer tabellen
+
+```
+

@@ -8,8 +8,8 @@ library(gridExtra)
 
 
 # Last ned datafilen
-download.file(url = "https://ndownloader.figstatic.com/files/14702420", 
-              destfile = "./data/hypertrophy.csv") # Laster ned datafilen.
+#download.file(url = "https://ndownloader.figstatic.com/files/14702420", 
+#              destfile = "./data/hypertrophy.csv") # Laster ned datafilen.
 
 hypertrophy <- read_csv("./data/hypertrophy.csv")  # Laster inn datafilen og kobler den til objektet hypertrophy.
 
@@ -75,7 +75,7 @@ hypertrophy %>%
   ungroup() # Fjerner grupperingen av datasettet.
 
 # Lager modellen
-model1 <- lm(Squat_3RM_kg ~ AVG_CSA_T1 + DXA_LBM_1, data = hypertrophy) # Lager en regresjonsmodell hvor vi tester sammenhengen i Squat_3RM_kg med både kroppsvekt og tverrsnittsareal.
+model1 <- lm(Squat_3RM_kg ~ AVG_CSA_T1, data = hypertrophy) # Lager en regresjonsmodell hvor vi tester sammenhengen i Squat_3RM_kg med både kroppsvekt og tverrsnittsareal.
 summary(model1)
 
 tidymodel1 <- tidy(model1) # Gjør tallene fra modellen penere og lagrer det i et nytt objekt.

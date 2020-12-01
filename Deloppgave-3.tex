@@ -1,0 +1,439 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Deloppgave 3},
+  pdfauthor={Gruppe 1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+
+\title{Deloppgave 3}
+\author{Gruppe 1}
+\date{11/26/2020}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Last inn datapakker}
+\KeywordTok{library}\NormalTok{(tidyverse) }\CommentTok{# Laster inn de ulike pakkene som blir brukt i prosjektet}
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(rstatix)}
+\KeywordTok{library}\NormalTok{(flextable)}
+\KeywordTok{library}\NormalTok{(grid)}
+\KeywordTok{library}\NormalTok{(gridExtra)}
+\KeywordTok{library}\NormalTok{(kableExtra)}
+
+
+\CommentTok{# Last ned datafilen}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://ndownloader.figstatic.com/files/14702420"}\NormalTok{, }
+              \DataTypeTok{destfile =} \StringTok{"./data/hypertrophy.csv"}\NormalTok{) }\CommentTok{# Laster ned datafilen.}
+
+\NormalTok{hypertrophy <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"./data/hypertrophy.csv"}\NormalTok{)  }\CommentTok{# Laster inn datafilen og kobler den til objektet hypertrophy.}
+
+
+\CommentTok{# Velger ut interessante variabler}
+\NormalTok{var_interest <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"SUB_ID"}\NormalTok{, }\StringTok{"GROUP"}\NormalTok{, }\StringTok{"AGE"}\NormalTok{, }\StringTok{"T1_BODY_MASS"}\NormalTok{, }\StringTok{"PERCENT_TYPE_II_T1"}\NormalTok{, }
+                  \StringTok{"Squat_3RM_kg"}\NormalTok{, }\StringTok{"DXA_LBM_1"}\NormalTok{, }\StringTok{"DXA_FM_T1"}\NormalTok{, }\StringTok{"SQUAT_VOLUME"}\NormalTok{) }\CommentTok{# Plukker ut hvilke variabler vi er interesserte i å ha med og lagrer de i var_interest.}
+
+\NormalTok{tabell1 <-}\StringTok{ }\NormalTok{hypertrophy }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Kobler datasettet hypetrophy til objektet hyptable slik at vi kan lage en tabell uten å påvirke hypertrophy datasettet.}
+\StringTok{  }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{all_of}\NormalTok{(var_interest)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Selekterer variablene fra var_interest.}
+\StringTok{  }
+\StringTok{  }
+\StringTok{  }\CommentTok{# Denne delen spesifiserer hvilke verdier vi vil ha med og komprimerer datasettet.}
+\StringTok{  }\CommentTok{# Navnene kommer inn i "variable" og verdier inn i "value".}
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(}\DataTypeTok{names_to =} \StringTok{"variable"}\NormalTok{,}
+               \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
+               \DataTypeTok{cols =}\NormalTok{ AGE}\OperatorTok{:}\NormalTok{SQUAT_VOLUME) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(variable) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{ (}\DataTypeTok{m =} \KeywordTok{mean}\NormalTok{(value),}
+             \DataTypeTok{s =} \KeywordTok{sd}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{  }\CommentTok{#Regner ut gjennomsnittet og standardavviket.}
+\StringTok{  }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{ms =} \KeywordTok{paste}\NormalTok{(}\KeywordTok{round}\NormalTok{(m, }\DecValTok{1}\NormalTok{), }
+                    \StringTok{" ("}\NormalTok{,}
+                    \KeywordTok{round}\NormalTok{(s, }\DecValTok{1}\NormalTok{),}
+                    \StringTok{")"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{), }\CommentTok{# Denne delen gjør at standardavviket havner i en parantes}
+         \CommentTok{# med en desimal.}
+         \DataTypeTok{variable =} \KeywordTok{factor}\NormalTok{(variable, }
+                           \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"AGE"}\NormalTok{, }\CommentTok{# Bestemmer rekkefølgen i tabellen}
+                                      \StringTok{"T1_BODY_MASS"}\NormalTok{, }
+                                      \StringTok{"DXA_LBM_1"}\NormalTok{, }
+                                      \StringTok{"DXA_FM_T1"}\NormalTok{, }
+                                      \StringTok{"PERCENT_TYPE_II_T1"}\NormalTok{, }
+                                      \StringTok{"Squat_3RM_kg"}\NormalTok{, }
+                                      \StringTok{"SQUAT_VOLUME"}\NormalTok{), }
+                           \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Alder (år)"}\NormalTok{, }\CommentTok{# Bestemmer navnene på variablene}
+                                      \StringTok{"Kroppsvekt (kg)"}\NormalTok{, }
+                                      \StringTok{"DXA LST (kg)"}\NormalTok{, }
+                                      \StringTok{"DXA FM (kg)"}\NormalTok{, }
+                                      \StringTok{"Type II Fiber (%)"}\NormalTok{, }
+                                      \StringTok{"3RM knebøy (kg)"}\NormalTok{, }
+                                      \StringTok{"Totalt treningsvolum (kg) fra uke 1 til 6"}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{m, }\OperatorTok{-}\NormalTok{s) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# Selekterer vekk gjennomsnittet og standardavviket}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(variable)   }\CommentTok{# Sorterer tabellen med utgangspunkt i variablene}
+
+\NormalTok{tabell1 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Variabel"}\NormalTok{, }\StringTok{""}\NormalTok{),}
+        \DataTypeTok{caption =} \StringTok{"Tabell 1: Forsøkspersonene ved pre-test. Verdiene er oppgitt i gjennomsnitt og (standardavvik)"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-1}Tabell 1: Forsøkspersonene ved pre-test. Verdiene er oppgitt i gjennomsnitt og (standardavvik)}
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+Variabel & \\
+\hline
+Alder (år) & 21.4 (2.1)\\
+\hline
+Kroppsvekt (kg) & 82.9 (11.5)\\
+\hline
+DXA LST (kg) & 64.7 (9)\\
+\hline
+DXA FM (kg) & 14.9 (4.2)\\
+\hline
+Type II Fiber (\%) & 55.2 (14.3)\\
+\hline
+3RM knebøy (kg) & 131.3 (19.5)\\
+\hline
+Totalt treningsvolum (kg) fra uke 1 til 6 & 107473.5 (16596.6)\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabell1 }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Bruker objektet hyptable til å lage tabellen}
+\StringTok{  }
+\StringTok{  }\KeywordTok{flextable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{#Lag tabell med Flextable}
+\StringTok{  }
+\StringTok{  }\KeywordTok{set_header_labels}\NormalTok{(}\DataTypeTok{variable =} \StringTok{"Variabel"}\NormalTok{,}
+                    \DataTypeTok{ms =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }
+\StringTok{  }\KeywordTok{add_header_row}\NormalTok{(}\DataTypeTok{values =} \StringTok{"Tabell 1"}\NormalTok{, }\DataTypeTok{colwidths =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Angir tittel på tabellen}
+\StringTok{  }
+\StringTok{  }\KeywordTok{add_footer_row}\NormalTok{(}\DataTypeTok{values =} \StringTok{"Verdier er oppgitt i gjennomsnitt og (Standardavvik)"}\NormalTok{, }\DataTypeTok{colwidths =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{#Angir en fotnote med beskrivelse av tabellen.}
+\StringTok{  }
+\StringTok{  }\KeywordTok{autofit}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{#Gjør tabellen penere}
+\StringTok{  }\KeywordTok{fontsize}\NormalTok{(}\DataTypeTok{part =} \StringTok{"header"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=4.50in,height=2.96in,keepaspectratio]{Deloppgave-3_files/figure-latex/unnamed-chunk-1-1.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{##### Regresjonsmodell ######}
+\NormalTok{hypertrophy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 30 x 275
+##    SUB_ID GROUP CLUSTER ID_CLUST PERCENT_TYPE_II~ PERCENT_TYPE_I_~ FAST_CSA_T1
+##    <chr>  <chr> <chr>      <dbl>            <dbl>            <dbl>       <dbl>
+##  1 MRV001 WP    LOW            1             45.2             54.8       4629.
+##  2 MRV002 WP    HIGH           2             26.7             73.3       4939.
+##  3 MRV003 GWP   HIGH           2             81.1             18.9       3940.
+##  4 MRV004 GWP   LOW            1             67               33         4741.
+##  5 MRV005 MALTO HIGH           2             73.9             26.1       3207.
+##  6 MRV006 WP    LOW            1             54.6             45.4       5771.
+##  7 MRV007 WP    <NA>          NA             65               35         3144.
+##  8 MRV009 GWP   <NA>          NA             70.3             29.7       5829.
+##  9 MRV010 MALTO <NA>          NA             58.9             41.1       4875.
+## 10 MRV011 MALTO HIGH           2             66.0             34.0       3461.
+## # ... with 20 more rows, and 268 more variables: SLOW_CSA_T1 <dbl>,
+## #   FAST_NUCLEI_T1 <dbl>, FAST_NUCLEI_T2 <dbl>, T2T1__FAST_NUCLEI <dbl>,
+## #   T2T1_PERCENT_CHANGE_FAST_NUCLEI <dbl>, FAST_NUCLEI_T3 <dbl>,
+## #   T3T2__FAST_NUCLEI <dbl>, T3T2_PERCENT_CHANGE_FAST_NUCLEI <dbl>,
+## #   T3T1__FAST_NUCLEI <dbl>, T3T1_PERCENT_CHANGE_FAST_NUCLEI <dbl>,
+## #   SLOW_NUCLEI_T1 <dbl>, SLOW_NUCLEI_T2 <dbl>, T2T1__SLOW_NUCLEI <dbl>,
+## #   T2T1_PERCENT_CHANGE_SLOW_NUCLEI <dbl>, SLOW_NUCLEI_T3 <dbl>,
+## #   T3T2__SLOW_NUCLEI <dbl>, T3T2_PERCENT_CHANGE_SLOW_NUCLEI <dbl>,
+## #   T3T1__SLOW_NUCLEI <dbl>, T3T1_PERCENT_CHANGE_SLOW_NUCLEI <dbl>,
+## #   AR_PROTEIN_T1 <dbl>, AR_PROTEIN_T2 <dbl>, T2T1__AR_PROTEIN <dbl>,
+## #   T2T1_PERCENT_CHANGE_AR_PROTEIN <dbl>, AR_PROTEIN_T3 <dbl>,
+## #   T3T2__AR_PROTEIN <dbl>, T3T2_PERCENT_CHANGE_AR_PROTEIN <dbl>,
+## #   T3T1__AR_PROTEIN <dbl>, T3T1_PERCENT_CHANGE_AR_PROTEIN <dbl>,
+## #   PROTEASOME_T1 <dbl>, PROTEASOME_T2 <dbl>, T2T1__PROTEASOME <dbl>,
+## #   T2T1_PERCENT_CHANGE_PROTEASOME <dbl>, PROTEASOME_T3 <dbl>,
+## #   T3T2__PROTEASOME <dbl>, T3T2_PERCENT_CHANGE_PROTEASOME <dbl>,
+## #   T3T1__PROTEASOME <dbl>, T3T1_PERCENT_CHANGE_PROTEASOME <dbl>,
+## #   T1_GLYCOGEN_nnmolmg <dbl>, T2_GLYCOGEN_nnmolmg <dbl>,
+## #   T2T1__GLYCOGEN_nnmolmg <dbl>, T2T1_PERCENT_CHANGE_GLYCOGEN_nnmolmg <dbl>,
+## #   T3_GLYCOGEN_nnmolmg <dbl>, T3T2__GLYCOGEN_nnmolmg <dbl>,
+## #   T3T2_PERCENT_CHANGE_GLYCOGEN_nnmolmg <dbl>, T3T1__GLYCOGEN_nnmolmg <dbl>,
+## #   T3T1_PERCENT_CHANGE_GLYCOGEN_nnmolmg <dbl>, CS_T1 <dbl>, CS_T2 <dbl>,
+## #   T2T1__CS <dbl>, T2T1_PERCENT_CHANGE_CS <dbl>, CS_T3 <dbl>, T3T2__CS <dbl>,
+## #   T3T2_PERCENT_CHANGE_CS <dbl>, T3T1__CS <dbl>, T3T1_PERCENT_CHANGE_CS <dbl>,
+## #   T1_CK_ACTIVITY_IUL <dbl>, T2_CK_ACTIVITY_IUL <dbl>, T2T1_CK_ACT <dbl>,
+## #   T2T1_CK_PERCENT <dbl>, T3_CK_ACTIVITY_IUL <dbl>, T3T2_CK_ACT <dbl>,
+## #   T3T2_CK_PERCENT <dbl>, T3T1_CK_ACT <dbl>, T3T1_CK_PERCENT <dbl>,
+## #   T1_TESTOSTERONE_ngdl <dbl>, T2_TESTOSTERONE_ngdl <dbl>,
+## #   T2T1__TESTOSTERONE_ngdl <dbl>, T2T1_PERCENT_CHANGE_TESTOSTERONE_ngdl <dbl>,
+## #   T3_TESTOSTERONE_ngdl <dbl>, T3T2__TESTOSTERONE_ngdl <dbl>,
+## #   T3T2_PERCENT_CHANGE_TESTOSTERONE_ngdl <dbl>, T3T1__TESTOSTERONE_ngdl <dbl>,
+## #   T3T1_PERCENT_CHANGE_TESTOSTERONE_ngdl <dbl>, T1_CORTISOL_microgrdl <dbl>,
+## #   T2_CORTISOL_microgrdl <dbl>, T2T1__CORTISOL_microgrdl <dbl>,
+## #   T2T1_PERCENT_CHANGE_CORTISOL_microgrdl <dbl>, T3_CORTISOL_microgrdl <dbl>,
+## #   T3T2__CORTISOL_microgrdl <dbl>,
+## #   T3T2_PERCENT_CHANGE_CORTISOL_microgrdl <dbl>,
+## #   T3T1__CORTISOL_microgrdl <dbl>,
+## #   T3T1_PERCENT_CHANGE_CORTISOL_microgrdl <dbl>, T1_PAN_4EBP1 <dbl>,
+## #   T2_PAN_4EBP1 <dbl>, T2T1__PAN_4EBP1 <dbl>,
+## #   T2T1_PERCENT_CHANGE_PAN_4EBP1 <dbl>, T3_PAN_4EBP1 <dbl>,
+## #   T3T2__PAN_4EBP1 <dbl>, T3T2_PERCENT_CHANGE_PAN_4EBP1 <dbl>,
+## #   T3T1__PAN_4EBP1 <dbl>, T3T1_PERCENT_CHANGE_PAN_4EBP1 <dbl>,
+## #   T1_PHOSPHO_4EBP1 <dbl>, T2_PHOSPHO_4EBP1 <dbl>, T2T1__PHOSPHO_4EBP1 <dbl>,
+## #   T2T1_PERCENT_CHANGE_PHOSPHO_4EBP1 <dbl>, T3_PHOSPHO_4EBP1 <dbl>,
+## #   T3T2__PHOSPHO_4EBP1 <dbl>, T3T2_PERCENT_CHANGE_PHOSPHO_4EBP1 <dbl>,
+## #   T3T1__PHOSPHO_4EBP1 <dbl>, T3T1_PERCENT_CHANGE_PHOSPHO_4EBP1 <dbl>, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{# Fjerner grupperingen av datasettet.}
+
+\CommentTok{# Lager modellen}
+\NormalTok{model1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Squat_3RM_kg }\OperatorTok{~}\StringTok{ }\NormalTok{AVG_CSA_T1 }\OperatorTok{+}\StringTok{ }\NormalTok{DXA_LBM_}\DecValTok{1}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ hypertrophy) }\CommentTok{# Lager en regresjonsmodell hvor vi tester sammenhengen i Squat_3RM_kg med både kroppsvekt og tverrsnittsareal.}
+\KeywordTok{summary}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Squat_3RM_kg ~ AVG_CSA_T1 + DXA_LBM_1, data = hypertrophy)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -24.054  -9.243  -2.078   6.671  37.351 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 27.523601  25.022365   1.100    0.281    
+## AVG_CSA_T1   0.002040   0.003242   0.629    0.535    
+## DXA_LBM_1    1.477133   0.306709   4.816 4.99e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 14.82 on 27 degrees of freedom
+## Multiple R-squared:  0.4623, Adjusted R-squared:  0.4225 
+## F-statistic: 11.61 on 2 and 27 DF,  p-value: 0.0002302
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tidymodel1 <-}\StringTok{ }\KeywordTok{tidy}\NormalTok{(model1) }\CommentTok{# Gjør tallene fra modellen penere og lagrer det i et nytt objekt.}
+
+\CommentTok{# Korrelasjonstest}
+\NormalTok{cor <-}\StringTok{ }\KeywordTok{cor.test}\NormalTok{(hypertrophy}\OperatorTok{$}\NormalTok{Squat_3RM_kg,  hypertrophy}\OperatorTok{$}\NormalTok{DXA_LBM_}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{# Konfidensintervallene til modellen}
+\NormalTok{cfmodel1 <-}\StringTok{ }\KeywordTok{confint}\NormalTok{(model1)}
+
+\NormalTok{tabell2 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(tidymodel1, cfmodel1) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Setter sammen tidymodel2 og cfmodel2}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term =} \KeywordTok{factor}\NormalTok{(term, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"(Intercept)"}\NormalTok{,}
+                                        \StringTok{"AVG_CSA_T1"}\NormalTok{,}
+                                        \StringTok{"DXA_LBM_1"}\NormalTok{),}
+                       \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Intercept"}\NormalTok{, }
+                                  \StringTok{"Tverrsnittsareal"}\NormalTok{, }
+                                  \StringTok{"Kroppsmasse"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Variabel"}\NormalTok{, }\StringTok{"Estimat"}\NormalTok{, }\StringTok{"Std. Error"}\NormalTok{, }\StringTok{"Statistic"}\NormalTok{, }\StringTok{"P-verdi"}\NormalTok{,}
+                      \StringTok{"CI 2.5%"}\NormalTok{, }\StringTok{"CI 97.5%"}\NormalTok{),}
+        \DataTypeTok{digits =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+        \DataTypeTok{caption =} \StringTok{"Tabell 2: Oppsummering av regresjonsmodellen med konfidensintervaller "}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{()}
+
+\NormalTok{tabell2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-1}Tabell 2: Oppsummering av regresjonsmodellen med konfidensintervaller }
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r|r}
+\hline
+Variabel & Estimat & Std. Error & Statistic & P-verdi & CI 2.5\% & CI 97.5\%\\
+\hline
+Intercept & 27.524 & 25.022 & 1.10 & 0.28106 & -23.818 & 78.865\\
+\hline
+Tverrsnittsareal & 0.002 & 0.003 & 0.63 & 0.53459 & -0.005 & 0.009\\
+\hline
+Kroppsmasse & 1.477 & 0.307 & 4.82 & 0.00005 & 0.848 & 2.106\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Lager tabell med regresjonsmodellen og konfidensintervallene}
+\NormalTok{tabell2 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(tidymodel1, cfmodel1) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Setter sammen tidymodel2 og cfmodel2}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term =} \KeywordTok{factor}\NormalTok{(term, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"(Intercept)"}\NormalTok{,}
+                                        \StringTok{"AVG_CSA_T1"}\NormalTok{,}
+                                        \StringTok{"DXA_LBM_1"}\NormalTok{),}
+                       \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Intercept"}\NormalTok{, }
+                                  \StringTok{"Tverrsnittsareal"}\NormalTok{, }
+                                  \StringTok{"Kroppsmasse"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Endrer navn på kolonnene under "term"}
+\StringTok{  }\KeywordTok{flextable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Binder sammen konfidensintervallene og regresjonsmodellen til en tabell}
+\StringTok{  }\KeywordTok{colformat_num}\NormalTok{(}\DataTypeTok{col_keys =} \KeywordTok{c}\NormalTok{(}\StringTok{"estimate"}\NormalTok{, }
+                             \StringTok{"std.error"}\NormalTok{,}
+                             \StringTok{"2.5 %"}\NormalTok{,}
+                             \StringTok{"97.5 %"}\NormalTok{), }
+                \DataTypeTok{digits =} \DecValTok{3}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Endrer antall desimaler på bestemte kolonner.}
+\StringTok{  }\KeywordTok{colformat_num}\NormalTok{(}\DataTypeTok{col_keys =} \KeywordTok{c}\NormalTok{(}\StringTok{"p.value"}\NormalTok{), }
+                \DataTypeTok{digits =} \DecValTok{5}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{colformat_num}\NormalTok{(}\DataTypeTok{col_keys =} \KeywordTok{c}\NormalTok{(}\StringTok{"statistic"}\NormalTok{), }
+                \DataTypeTok{digits =} \DecValTok{1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{set_header_labels}\NormalTok{(}\DataTypeTok{estimate =} \StringTok{"Estimat (r)"}\NormalTok{, }\CommentTok{# Endrer navn }
+                    \DataTypeTok{std.error =} \StringTok{"Standard Error"}\NormalTok{, }
+                    \DataTypeTok{statistic =} \StringTok{"Statistic (t)"}\NormalTok{,}
+                    \DataTypeTok{p.value =} \StringTok{"P-verdi"}\NormalTok{,}
+                    \DataTypeTok{term =} \StringTok{"Term"}\NormalTok{,}
+                    \StringTok{"2.5 %"}\NormalTok{ =}\StringTok{ "CI 2.5 %"}\NormalTok{,}
+                    \StringTok{"97.5 %"}\NormalTok{ =}\StringTok{ "CI 97.5 %"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{autofit}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Gjør tabellen penere.}
+\StringTok{  }\KeywordTok{add_header_row}\NormalTok{(}\DataTypeTok{values =} \StringTok{"Tabell 2: Resultater regresjonsmodell med konfidensintervaller"}\NormalTok{, }\DataTypeTok{colwidths =} \DecValTok{7}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Legger til en overskrift.}
+\StringTok{  }\KeywordTok{fontsize}\NormalTok{(}\DataTypeTok{part =} \StringTok{"header"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{12}\NormalTok{) }\CommentTok{# Endrer størrelsen på overskriftene.}
+
+\NormalTok{tabell2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=7.29in,height=1.55in,keepaspectratio]{Deloppgave-3_files/figure-latex/unnamed-chunk-1-2.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Lager figurer som sammenligner de to variablene}
+\NormalTok{figur1 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(hypertrophy, }\KeywordTok{aes}\NormalTok{(AVG_CSA_T1, Squat_3RM_kg)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Figur 1: Muskelstyrke og muskelstørrelse"}\NormalTok{,}
+       \DataTypeTok{x =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"Tverrsnittsareal ("}\NormalTok{, mu, }\StringTok{"m)"}\NormalTok{)) , }\DataTypeTok{y =} \StringTok{"Muskelstyrke (kg)"}\NormalTok{)}
+
+\NormalTok{figur2 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(hypertrophy, }\KeywordTok{aes}\NormalTok{(DXA_LBM_}\DecValTok{1}\NormalTok{, Squat_3RM_kg)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Figur 2: Muskelstyrke og kroppsmasse"}\NormalTok{,}
+       \DataTypeTok{x=}\StringTok{"Kroppsmasse (kg)"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Muskelstyrke (kg)"}\NormalTok{)}
+
+\KeywordTok{grid.arrange}\NormalTok{(figur1, figur2, }\DataTypeTok{nrow=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Deloppgave-3_files/figure-latex/unnamed-chunk-1-3.pdf}
+
+\end{document}
