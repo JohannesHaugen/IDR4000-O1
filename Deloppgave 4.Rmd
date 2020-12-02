@@ -113,7 +113,7 @@ raw.est.figur <- est %>%
   geom_line(position = position_dodge(width = 0.2)) +
   geom_point(position = position_dodge(width = 0.2)) +
   labs(x = "", y = "1RM (kg)",
-       color = "Gruppe", title = "Figur 1") + # Nye akseetiketter
+       color = "Gruppe", title = "Figur 4.3") + # Nye akseetiketter
   # Fjerner tekst og indikatorer på x-aksen fordi vi skal kombinere dette plottet med et annet, og bruke teksten og indikatorene fra det plottet
   theme(axis.text.x = element_blank(),
         axis.title.x = element_blank()) +
@@ -135,44 +135,17 @@ konfidensintervall <- confint(lmer1)
 # Henter estimatene fra interaksjonskoeffisientene fra modellen
 koef <- summary(lmer1)$coef
 
-koef %>%
-  data.frame() %>%
-  mutate(coef = factor(coef, levels = c("(Intercept)",
-                                        "timepointmid",
-                                        "timepointpost",
-                                        "groupRM10",
-                                        "timepointmid:groupRM10",
-                                        "timepointpost:groupRM10"), 
-                       labels=c("Gj.sn. pre-test",
-                                "Endring: pre - mid (10RM)",
-                                "Endring: pre - post (10RM",
-                                "Diff. 10RM - 30RM (Pre)",
-                                "Diff. 10RM - 30RM (Mid)",
-                                "Diff. 10RM - 30RM (Post)")))
+koef
 
 
 
 # Bruker cbind for å kombinere konfidensintervallene med koeffisientene.
 sum1 <- cbind(koef, data.frame(konfidensintervall)[3:8, ])
 
-sum1 %>%
-  mutate(koef = factor("koef", levels = c("(Intercept)",
-                                        "timepointmid",
-                                        "timepointpost",
-                                        "groupRM10",
-                                        "timepointmid:groupRM10",
-                                        "timepointpost:groupRM10"), 
-                       labels=c("Gj.sn. pre-test",
-                                "Endring: pre - mid (10RM)",
-                                "Endring: pre - post (10RM",
-                                "Diff. 10RM - 30RM (Pre)",
-                                "Diff. 10RM - 30RM (Mid)",
-                                "Diff. 10RM - 30RM (Post)")))
-
-
 # Lager en tabell ved hjelp av kable
 koeftabell <- sum1 %>%
-  mutate(coef = factor(coef, levels = c("(Intercept)",
+  mutate(coef = rownames(.), 
+         coef = factor(coef, levels = c("(Intercept)",
                                         "timepointmid",
                                         "timepointpost",
                                         "groupRM10",
@@ -183,15 +156,15 @@ koeftabell <- sum1 %>%
                                 "Endring: pre - post (10RM",
                                 "Diff. 10RM - 30RM (Pre)",
                                 "Diff. 10RM - 30RM (Mid)",
-                                "Diff. 10RM - 30RM (Post)"))) %>%
-  kable(col.names = c("Estimat", "Std. Error", "t-verdi", "CI 2,5%", "CI 97,5%"), # Navn på overskrifter
+                                "Diff. 10RM - 30RM (Post)"))) %>% # Navn på koeffisientene
+  select(coef, Estimate, `Std. Error`, `t value`, X2.5.., X97.5..) %>% # Rangerer variablene
+  kable(col.names = c("Koeffisient", "Estimat", "Std. Error", "t-verdi", "CI 2,5%", "CI 97,5%"), # Navn på overskrifter
         digits = c(1,1,2,1,1), # Bestemmer antall desimaler
         caption = "Tabell 1: Estimater fra koeffisientene, standard error, t-statistikk, nedre og øvre
         konfidensintervall ved pre-test, mid og post-test i begge gruppene") %>%
-  kable_styling()
-
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+           
 koeftabell
-
 
 
 # Figur for å vise anbefalt intensitet for utvikling av styrke. 
@@ -313,7 +286,7 @@ raw.est.figur2 <- est2 %>% # Lager et nytt objekt med utgangspunkt i est2
   geom_line(position = position_dodge(width = 0.2)) +
   geom_point(position = position_dodge(width = 0.2)) +
   labs(x = "", y = "Isometrisk styrke (N)", 
-       color = "Gruppe", title = "Figur 2") + # Setter nye navn på aksene og "legenden"
+       color = "Gruppe", title = "Figur 4.7") + # Setter nye navn på aksene og "legenden"
   # Fjerner tekst og akseetiketter på x-aksen fordi den skal kombineres med en annen figur
   theme(axis.text.x = element_blank(), 
         axis.title.x = element_blank()) +
@@ -340,11 +313,21 @@ sum2 <- cbind(koef2, data.frame(konfidensintervall2)[3:6, ])
 
 # Lager en tabell med outputten i regresjonsmodellen og konfidensintervallene
 koeftabell2 <- sum2 %>%
-  kable(col.names = c("Estimat", "Std. Error", "t-verdi", "CI 2,5%", "CI 97,5%"), # Navn på overskrifter
+  mutate(coef = rownames(.), 
+         coef = factor(coef, levels = c("(Intercept)",
+                                        "timepost",
+                                        "group3 sett",
+                                        "timepost:group3 sett"), 
+                       labels=c("Gj.sn. pre-test (3 sett)",
+                                "Endring: pre - post (3 sett)",
+                                "Diff. 3 sett - 1 sett (pre)",
+                                "Diff. 3 sett - 1 sett (post)"))) %>% # Navn på koeffisientene
+  select(coef, Estimate, `Std. Error`, `t value`, X2.5.., X97.5..) %>% # Rangerer variablene
+  kable(col.names = c("Koeffisient", "Estimat", "Std. Error", "t-verdi", "CI 2,5%", "CI 97,5%"), # Navn på overskrifter
         digits = c(1,1,2,1,1), # Bestemmer antall desimaler i tabellen
         caption = "Tabell 2: Estimater fra koeffisientene, standard error, t-statistikk, nedre og øvre
         konfidensintervall ved pre-test, økt 1 og post-test i begge gruppene") %>% # Overskrift på tabellen
-  kable_styling() # Gjør tabellen penere
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Gjør tabellen penere
 
 koeftabell2 # Printer tabellen
 

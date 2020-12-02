@@ -59,13 +59,13 @@ hyptable <- hypertrophy %>% # Kobler datasettet hypetrophy til objektet hyptable
                                       "PERCENT_TYPE_II_T1", 
                                       "Squat_3RM_kg", 
                                       "SQUAT_VOLUME"), 
-                           labels = c("Alder (år)", # Bestemmer navnene på variablene
-                                      "Kroppsvekt (kg)", 
+                           labels = c("Age (yrs)", # Bestemmer navnene på variablene
+                                      "Body mass (kg)", 
                                       "DXA LST (kg)", 
                                       "DXA FM (kg)", 
                                       "Type II Fiber (%)", 
-                                      "3RM knebøy (kg)", 
-                                      "Total treningsvolum (kg) fra uke 1 til 6"))) %>%
+                                      "3RM back squat (kg)", 
+                                      "Total training volume (kg) from week 1 to 6"))) %>%
   select(-m, -s) %>%   # Selekterer vekk gjennomsnittet og standardavviket
   
   pivot_wider(names_from = CLUSTER,
@@ -75,8 +75,8 @@ hyptable <- hypertrophy %>% # Kobler datasettet hypetrophy til objektet hyptable
   select(variable, `LOW (n = 10)`, `HIGH (n = 10)`) # Sorterer rekkefølgen på high og low
 
 hyptable %>% # Bruker objektet hyptable til å lage tabellen
-  kable(col.names = c("Variabel", "LOW (n = 10)", "HIGH (n = 10)"), # Endrer overskrifter
-        caption = "Tabell 1: Forsøkspersonene i de to gruppene ved pre-test. Verdiene er oppgitt i gjennomsnitt og (standardavvik).") %>% # Endrer tittelen
+  kable(col.names = c("Variable", "LOW (n = 10)", "HIGH (n = 10)"), # Endrer overskrifter
+        caption = "Table 1: Presentation of the two groups at baseline. Values are mean and (SD).") %>% # Endrer tittelen
   kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Endrer formateringen
 
 hyptable
@@ -97,8 +97,8 @@ df %>%
                                                 "T3T1_PERCENT_CHANGE_FAST_CSA"),
                            labels = c("Type II fiber change (%)",
                                       "Type II fiber change (%)"))) %>% # Endrer variabelteksten.
-  kable(col.names = c("Gruppe", "Variabel", "n", "Gj.sn. endring (%)", "Standardavvik (%)"),
-        caption = "Tabell 2: Gjennomsnittlige endringer i type II fiber fra pre- til post-test i de to gruppene") %>% #Lag tabell
+  kable(col.names = c("Group", "Variable", "n", "Avg. change (%)", "SD (%)"),
+        caption = "Table 2: Avg. type II fibre (%) change pre-post.") %>% #Lag tabell
   kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Endrer formateringen
   
 
@@ -109,7 +109,7 @@ hyp <- read_csv("./data/hypertrophy.csv") %>%
 
 bxp <- ggboxplot(hyp, x = "CLUSTER", y = "T3T1_PERCENT_CHANGE_FAST_CSA", 
                  ylab = "Endringer i type II fiber (%)", xlab = "CLUSTER", add = "jitter", SIZE = 0.5, fill = "CLUSTER",
-                 title = "Figur 1") + # Denne funskjonen lager et boxplot med utgangspunkt i variabelen hypertrophy.
+                 title = "Figure 1") + # Denne funskjonen lager et boxplot med utgangspunkt i variabelen hypertrophy.
   font("title", size = 10, face = "bold") + # Endrer størrelsen på etikettene
   font("xlab", size = 9) +
   font("ylab", size = 9) 
@@ -125,7 +125,7 @@ shapiro <- hyp %>%
 
 # Plott som viser normalfordelingen
 ggqqplot(hyp, x = "T3T1_PERCENT_CHANGE_FAST_CSA", facet.by = "CLUSTER") + # Lager plottet med utgangspunkt i variablene
-  labs(x = "Teoretiske kvantiler", y = "Dataenes kvantiler", caption = "QQ-plottet viser at dataene er tilnærmet normalfordelt.", cex.title=0.5, title = "Figur 1") +
+  labs(x = "Theoretical quantiles", y = "Sample quantiles", cex.title=0.5, title = "Figure 1") +
   font("title", size = 10, face = "bold") +
   font("xlab", size = 9) +
   font("ylab", size = 9) +
@@ -145,8 +145,8 @@ stat.test # Viser resultatet av testen
 
 stat.test %>% # Lager et nytt objekt som skal inneholde tabellen
   select(group1, group2, n1, n2, p) %>% # Velger variabler til tabellen
-  kable(col.names = c("Gruppe 1", "Gruppe 2", "N 1", "N 2", "P-verdi"), # Endrer overskriftene
-        caption = "Tabell 2: Resultater t-test", # Endrer tittelen
+  kable(col.names = c("Group 1", "Group 2", "N 1", "N 2", "P-value"), # Endrer overskriftene
+        caption = "Table 2: Summary of the t-test", # Endrer tittelen
         digits = c(NA, NA, 0, 0, 5)) %>% # Endrer antall desimaler
   kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Endrer formateringen
 
@@ -164,10 +164,10 @@ cohen <- hyp %>%  cohens_d(T3T1_PERCENT_CHANGE_FAST_CSA ~ CLUSTER, var.equal = T
 cohentable <- cohen %>% # Lager et nytt objekt som skal inneholde tabellen
   mutate(.y. = factor(.y., levels = c("T3T1_PERCENT_CHANGE_FAST_CSA"), # Endrer navnet på variabelen
                            labels = c("Type II fiber change (%)")),
-         magnitude = factor(magnitude, labels = c("Stor effekt"))) %>% # Endrer navnet på magnitude fra engelsk til norsk
-  kable(col.names = c("Variabel", "Gruppe 1", "Gruppe 2", "Effektstørrelse", "N 1", "N 2", "Størrelse"), # Endrer overskriftene i tabellen
+         magnitude = factor(magnitude, labels = c("Large"))) %>% # Endrer navnet på magnitude fra engelsk til norsk
+  kable(col.names = c("Variable", "Group 1", "Group 2", "Effect size", "N 1", "N 2", "Size"), # Endrer overskriftene i tabellen
         digits = c(NA, NA, NA, 2, 0, 0, NA), # Endrer antall desimaler
-        caption = "Tabell 3: Resultater Cohens D-formel") %>% # Endrer tittelen
+        caption = "Table 3: Results Cohen D-formula") %>% # Endrer tittelen
   kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Endrer formateringen
 
 cohentable # Printer tabellen
@@ -179,7 +179,7 @@ stat.test <- stat.test %>% add_xy_position(x = "CLUSTER")
 bxp + 
   stat_pvalue_manual(stat.test, tip.length = 0) +
   labs(subtitle = get_test_label(stat.test, detailed = TRUE),
-       caption = "Oppsummering av t-testen. Boxplottet viser endringene i type II fiber i de to gruppene fra pre- til post-test", title = "Figur 2.3") +
+       caption = "Summary of the t-test. The boxplot visualizes the change in type II fiber in both groups from pre-post.", title = "Figure 2.3") +
   theme(legend.position = "none") +
   font("subtitle", size = 9) +
   font("xlab", size = 9) +

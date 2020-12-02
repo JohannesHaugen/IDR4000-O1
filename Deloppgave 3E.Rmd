@@ -59,19 +59,19 @@ tabell1 <- hypertrophy %>% # Kobler datasettet hypetrophy til objektet hyptable 
                                       "PERCENT_TYPE_II_T1", 
                                       "Squat_3RM_kg", 
                                       "SQUAT_VOLUME"), 
-                           labels = c("Alder (år)", # Bestemmer navnene på variablene
-                                      "Kroppsvekt (kg)", 
+                           labels = c("Age (yrs)", # Bestemmer navnene på variablene
+                                      "Body mass (kg)", 
                                       "DXA LST (kg)", 
                                       "DXA FM (kg)", 
                                       "Type II Fiber (%)", 
-                                      "3RM knebøy (kg)", 
-                                      "Totalt treningsvolum (kg) fra uke 1 til 6"))) %>%
+                                      "3RM back squat (kg)", 
+                                      "Total training volume (kg) from week 1 to 6"))) %>%
   select(-m, -s) %>%  # Selekterer vekk gjennomsnittet og standardavviket
   arrange(variable)   # Sorterer tabellen med utgangspunkt i variablene
 
 tabell1 %>%
-  kable(col.names = c("Variabel", ""),
-        caption = "Tabell 1: Forsøkspersonene ved pre-test. Verdiene er oppgitt i gjennomsnitt og (standardavvik)") %>%
+  kable(col.names = c("Variable", ""),
+        caption = "Table 1: Presentation of the subjects at baseline. Values are mean and (SD)") %>%
    kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) # Endrer formateringen
 
 
@@ -99,12 +99,12 @@ tabell2 <- cbind(tidymodel1, cfmodel1) %>% # Setter sammen tidymodel2 og cfmodel
                                         "AVG_CSA_T1",
                                         "DXA_LBM_1"),
                        labels = c("Intercept", 
-                                  "Tverrsnittsareal", 
-                                  "Kroppsmasse"))) %>% 
-  kable(col.names = c("Variabel", "Estimat", "Std. Error", "Statistic", "P-verdi",
+                                  "Avg. CSA", 
+                                  "Lean body mass"))) %>% 
+  kable(col.names = c("Variable", "Estimate", "Std. Error", "Statistic", "P-value",
                       "CI 2.5%", "CI 97.5%"),
         digits = c(NA, 3, 3, 2, 5, 3, 3),
-        caption = "Tabell 2: Oppsummering av regresjonsmodellen med konfidensintervaller ") %>%
+        caption = "Table 2: Summary of the regression model including 95% CI.") %>%
   kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
 
 tabell2
@@ -115,15 +115,15 @@ tabell2
 figur1 <- ggplot(hypertrophy, aes(AVG_CSA_T1, Squat_3RM_kg)) + 
   geom_point() +
   geom_smooth(method = lm, se=FALSE) +
-  labs(title="Figur 3.3.1: Muskelstyrke og muskelstørrelse",
-       x = expression(paste("Tverrsnittsareal (", mu, "m)")) , y = "Muskelstyrke (kg)")
+  labs(title="Figure 1: Muscle strength and muscle size",
+       x = expression(paste("CSA (", mu, "m)")) , y = "Muscle strength (kg)")
 
 figur2 <- ggplot(hypertrophy, aes(DXA_LBM_1, Squat_3RM_kg)) + 
   geom_point() +
   geom_smooth(method = lm, se=FALSE) +
-  labs(title="Figur 3.3.2: Muskelstyrke og kroppsmasse",
-       x="Kroppsmasse (kg)", y = "Muskelstyrke (kg)")
+  labs(title="Figure 2: Muscle strength and body mass",
+       x="Body mass (kg)", y = "Muscle strength (kg)")
 
-grid.arrange(figur1, figur2, nrow=1, bottom=textGrob("Sammenligning av muskelstyrke og muskelstørrelse mot muskelstyrke og kroppsmasse. Det er en større sammenheng mellom muskelstyrke og kroppsmasse"))
+grid.arrange(figur1, figur2, nrow=1)
 ```
 
